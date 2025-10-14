@@ -27,6 +27,8 @@ static int getTok()
 
 	while (isspace(lastChar)) lastChar = getchar();
 
+	// identifier: [a-zA-Z][a-zA-Z0-9]*
+	// checks for keywords like def
 	if (isalpha(lastChar)) {
 		identifierStr = lastChar;
 
@@ -41,7 +43,7 @@ static int getTok()
 
 		return TOK_IDENTIFIER;
 	}
-
+	// number 0-9
 	if (isdigit(lastChar) || lastChar == '.') {
 		std::string numStr;
 
@@ -50,8 +52,28 @@ static int getTok()
 			lastChar = getchar();
 		} while (isdigit(lastChar) || lastChar == '.');
 
+		// string to double
+		// "123.45abc" => 123.45
 		numVal = strtod(numStr.c_str(), 0);
 
 		return TOK_NUMBER;
 	}
+	// handles comments in code
+	if (lastChar == '#') {
+		do
+			lastChar = getchar();
+		while (lastChar != EOF &&
+			lastChar != '\n' && lastChar != '\r');
+
+		if (lastChar != EOF)
+			return getTok();
+	}
+	// Check for end of file.  Don't eat the EOF.
+	if (lastChar == EOF) {
+		return TOK_EOF;
+	}
+	// Otherwise, just return the character as its ascii value.
+	int thisChar = lastChar;
+	lastChar = getchar();
+	return thisChar;
 }
