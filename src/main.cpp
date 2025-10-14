@@ -1,5 +1,10 @@
-#include "../include/common.h"
+#include "../include/lexer.h"
 
 int main() {
-	std::cout << "hello i am here";
+
+	enum Token myVar = TOK_NUMBER;
+
+
+	
+	std::cout << "i am here ";
 }
