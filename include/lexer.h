@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../include/common.h"
 
 /*
@@ -21,7 +23,7 @@ enum Token {
 static std::string identifierStr; //for tok_identifier
 static double numVal;
 
-static int getTok()
+static int getToken()
 {
 	static int lastChar = ' ';
 
@@ -66,7 +68,7 @@ static int getTok()
 			lastChar != '\n' && lastChar != '\r');
 
 		if (lastChar != EOF)
-			return getTok();
+			return getToken();
 	}
 	// Check for end of file.  Don't eat the EOF.
 	if (lastChar == EOF) {

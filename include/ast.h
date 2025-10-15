@@ -22,14 +22,14 @@ public:
 	VariableExprAst(const std::string& nm) : name(nm) { }
 };
 
-/// BinaryExprAST - Expression class for a binary operator.
+// BinaryExprAST - Expression class for a binary operator.
 class BinaryExprAst : public ExprAst {
 	char operation;
 	std::unique_ptr<ExprAst> LHS, RHS;
 
 public:
 	BinaryExprAst(char op,auto lhs,auto rhs)
-		:operation(op),LHS(std::move(lhs),RHS(std::move(rhs)) { }
+		:operation(op),LHS(std::move(lhs)),RHS(std::move(rhs)) { }
 };
 
 /// CallExprAST - Expression class for function calls.
@@ -38,7 +38,7 @@ class CallExptAst : public ExprAst {
 	std::vector<std::unique_ptr<ExprAst>> args;
 public:
 	CallExptAst(const std::string& caller, auto args)
-		: callee(caller),args(std::move(Args)) { }
+		: callee(caller),args(std::move(args)) { }
 };
 
 class ProtoTypeAst {
@@ -61,7 +61,5 @@ class FunctionAst {
 public:
 	FunctionAst(std::unique_ptr<ProtoTypeAst> proto,
 		std::unique_ptr<ExprAst> body)
-		:functionProto(std::move(proto),functionBody(std::move(body))) { }
-
-	
+		:functionProto(std::move(proto)),functionBody(std::move(body)) { }
 };
