@@ -23,6 +23,7 @@ public:
 };
 
 // BinaryExprAST - Expression class for a binary operator.
+//For "x + y", Op = '+', LHS = Variable("x"), RHS = Variable("y").
 class BinaryExprAst : public ExprAst {
 	char operation;
 	std::unique_ptr<ExprAst> LHS, RHS;
@@ -32,7 +33,8 @@ public:
 		:operation(op),LHS(std::move(lhs)),RHS(std::move(rhs)) { }
 };
 
-/// CallExprAST - Expression class for function calls.
+// CallExprAST - Expression class for function calls.
+// "add(1, x)", Callee="add", Args=[Number(1), Variable("x")].
 class CallExptAst : public ExprAst {
 	std::string callee;
 	std::vector<std::unique_ptr<ExprAst>> args;
@@ -41,6 +43,7 @@ public:
 		: callee(caller),args(std::move(args)) { }
 };
 
+//(function signature, like "def add(x y)")
 class ProtoTypeAst {
 	std::string protoName;
 	std::vector<std::string> protoArgs;

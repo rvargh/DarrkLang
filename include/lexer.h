@@ -27,8 +27,11 @@ static int getToken()
 {
 	static int lastChar = ' ';
 
-	while (isspace(lastChar)) lastChar = getchar();
-
+	while (isspace(lastChar))
+	{
+		lastChar = getchar();
+	}
+	std::cout << "i am characters1 : " << (char)lastChar << std::endl;
 	// identifier: [a-zA-Z][a-zA-Z0-9]*
 	// checks for keywords like def
 	if (isalpha(lastChar)) {
@@ -76,6 +79,9 @@ static int getToken()
 	}
 	// Otherwise, just return the character as its ascii value.
 	int thisChar = lastChar;
+	
 	lastChar = getchar();
+	std::cout << "i am characters2 : " << (char)lastChar << std::endl;
+	
 	return thisChar;
 }
